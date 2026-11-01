@@ -15,6 +15,10 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
 
+
+    @Column(name = "token_fcm", length = 500)
+    private String tokenFcm;
+
     @Column(nullable = false, length = 100) //cria as colunas a adiciona regras
     private String nome;
     private int idade;
@@ -42,46 +46,7 @@ public class Paciente {
         this.telefone = telefone;
 
     }
-
-    //Metodos
-
-
-    // Adiciona a lista de limiar do paciente um objeto limiar -- obs: Não utilizamos o metodo, ele é acionado pelo metodo da classe Cuidador - definirLimiarPaciente
-    public void adicionarAListaLimiarSegurancaPaciente(LimiarSeguranca limiarSeguranca){
-        limiarSeguranca.setPaciente(this);
-        this.limiarSegurancaPaciente.add(limiarSeguranca);
-
-    }
- 
-    public void analisarRegistros(){
-
-        /*limiarSegurancaPaciente.get(i).getTipoSinalVital();
-        limiarSegurancaPaciente.get(i).getValorMax();
-        limiarSegurancaPaciente.get(i).getValorMin();*/
-
-        for (int i = 0; i < limiarSegurancaPaciente.size() ; i++) {
-
-
-            for (int j = 0; j < historicoRegistros.size() ; j++) {
-
-           /* historicoRegistros.get(j).getTipoSinalVital();
-            historicoRegistros.get(j).getValorSinalVital();*/
-
-                if (limiarSegurancaPaciente.get(i).getTipoSinalVital() == historicoRegistros.get(j).getTipoSinalVital()) {
-                    if (historicoRegistros.get(j).getValorSinalVital() > limiarSegurancaPaciente.get(i).getValorMax() || historicoRegistros.get(j).getValorSinalVital() < limiarSegurancaPaciente.get(i).getValorMin()) {
-
-                        System.out.println("Alerta!!! o Valor Mínimo da " + limiarSegurancaPaciente.get(i).getTipoSinalVital() + " é de: " + limiarSegurancaPaciente.get(i).getValorMin() + ". Já o Máximo é de: " + limiarSegurancaPaciente.get(i).getValorMax() );
-                        System.out.println("O Valor medido é dê: " + historicoRegistros.get(j).getValorSinalVital());
-                    }
-
-                    else System.out.println("Tudo ok!");
-                }
-
-            }
-
-        }
-
-    }
+    
 
 
 
@@ -148,6 +113,14 @@ public class Paciente {
 
     public void setCuidador(Cuidador cuidador) {
         this.cuidador = cuidador;
+    }
+
+    public String getTokenFcm() {
+        return tokenFcm;
+    }
+
+    public void setTokenFcm(String tokenFcm) {
+        this.tokenFcm = tokenFcm;
     }
 }
 

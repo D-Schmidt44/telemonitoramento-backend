@@ -37,19 +37,6 @@ public class Cuidador {
 
     //Métodos
 
-    public void adicionarPaciente(Paciente paciente){
-        paciente.setCuidador(this);
-        pacientes.add(paciente);
-    }
-
-    public void definirLimiarPaciente(Paciente paciente, LimiarSeguranca limiarSeguranca) {
-        paciente.adicionarAListaLimiarSegurancaPaciente(limiarSeguranca);
-
-    }
-
-    public void checarRegistroPaciente(Paciente paciente) {
-        paciente.analisarRegistros();
-    }
 
     public Long getId() {
         return id;

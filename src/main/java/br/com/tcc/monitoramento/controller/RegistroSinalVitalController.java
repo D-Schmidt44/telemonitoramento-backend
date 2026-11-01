@@ -5,10 +5,9 @@ import br.com.tcc.monitoramento.repository.RegistroSinalVitalRepository;
 import br.com.tcc.monitoramento.service.RegistroSinalVitalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/registrosinalvital")
@@ -21,8 +20,16 @@ public class RegistroSinalVitalController {
     }
 
     @PostMapping
-    public ResponseEntity<RegistroSinalVital> salvar(@RequestBody RegistroSinalVital registroSinalVital) {
+    public ResponseEntity<RegistroSinalVital> criarRegistro(@RequestBody RegistroSinalVital registroSinalVital) {
         RegistroSinalVital novoRegistroSinalVital = registroSinalVitalService.salvar(registroSinalVital);
         return ResponseEntity.status(HttpStatus.CREATED).body(novoRegistroSinalVital);
     }
+
+
+    @GetMapping("/paciente/{pacienteId}")
+    public ResponseEntity<List<RegistroSinalVital>> listarPorPaciente(@PathVariable Long pacienteId) {
+        List<RegistroSinalVital> historico = registroSinalVitalService.listarPorPaciente(pacienteId);
+        return ResponseEntity.ok(historico);
+    }
+
 }
